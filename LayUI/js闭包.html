@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        function a() {
+            var n = 0;
+            function inc() {
+                n++;
+                console.log(n);
+            }
+            inc();
+            inc();
+        }
+        //a();
+
+        //var c = a();
+        //c();
+        //c();
+
+        function createFunctions() {
+            var result = new Array();
+            for (var i = 0; i < 10; i++) {
+                result[i] = function () {
+                    return i;
+                };
+            }
+            return result;
+        }
+
+        var funcs = createFunctions();
+        for (var i = 0; i < funcs.length; i++) {
+            console.log("funcs[i]: " + funcs());
+        }
+
+    </script>
+</body>
+</html>

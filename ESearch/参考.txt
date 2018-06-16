@@ -1,0 +1,155 @@
+﻿ES入门干活系列
+https://www.cnblogs.com/xing901022/p/4967796.html
+ES5.2版本基本查询
+https://blog.csdn.net/taoshujian/article/details/60397099
+ES5.0对象复合语句写法
+https://www.cnblogs.com/a-du/p/7118051.html
+大数据与人工智能的坑
+https://www.cnblogs.com/zlslch/p/6421577.html
+ES最强教程
+https://blog.csdn.net/u013613428/article/details/78134170
+ES5.2官网
+https://www.elastic.co/guide/en/elasticsearch/reference/5.2/docs-update.html#_updates_with_a_partial_document
+Windows下面命令行工具
+https://www.cnblogs.com/haochuang/p/5593411.html
+
+
+
+
+根据指定的搜索条件删除DSL
+POST  db_student/student/_delete_by_query
+{ "query": { "match_all": {} }}
+删除index为db_student,类型type为student下面的所有数据
+
+script_fields kibana查询
+
+POST bank/account/_search
+{
+  "query":{
+    	"match":{
+			"account_number":"638"
+		}
+  },
+  "script_fields": {
+    "balance": {
+      "script": {
+        "lang": "painless",
+        "inline": "2*doc['balance'].value"
+      }
+    }
+  }
+}
+inline弃用，使用source
+POST bank/account/_search
+{
+  "query":{
+    	"match":{
+			"account_number":"638"
+		}
+  },
+  "script_fields": {
+    "balance": {
+      "script": {
+        "lang": "painless",
+        "source": "2*doc['balance'].value"
+      }
+    }
+  }
+}
+
+//新建一个类型type为player，名称为hockey的索引，并插入一些测试数据
+PUT hockey/player/_bulk?refresh
+{"index":{"_id":1}} 
+{"first":"johnny","last":"gaudreau","goals":[9,27,1],"assists":[17,46,0],"gp":[26,82,1],"born":"1993/08/13"} 
+{"index":{"_id":2}} 
+{"first":"sean","last":"monohan","goals":[7,54,26],"assists":[11,26,13],"gp":[26,82,82],"born":"1994/10/12"} 
+{"index":{"_id":3}} 
+{"first":"jiri","last":"hudler","goals":[5,34,36],"assists":[11,62,42],"gp":[24,80,79],"born":"1984/01/04"} 
+{"index":{"_id":4}} 
+{"first":"micheal","last":"frolik","goals":[4,6,15],"assists":[8,23,15],"gp":[26,82,82],"born":"1988/02/17"} 
+{"index":{"_id":5}} 
+{"first":"sam","last":"bennett","goals":[5,0,0],"assists":[8,1,0],"gp":[26,1,0],"born":"1996/06/20"} 
+{"index":{"_id":6}} 
+{"first":"dennis","last":"wideman","goals":[0,26,15],"assists":[11,30,24],"gp":[26,81,82],"born":"1983/03/20"}
+{"index":{"_id":7}} 
+{"first":"david","last":"jones","goals":[7,19,5],"assists":[3,17,4],"gp":[26,45,34],"born":"1984/08/10"} 
+{"index":{"_id":8}} 
+{"first":"tj","last":"brodie","goals":[2,14,7],"assists":[8,42,30],"gp":[26,82,82],"born":"1990/06/07"} 
+{"index":{"_id":39}} 
+{"first":"mark","last":"giordano","goals":[6,30,15],"assists":[3,30,24],"gp":[26,60,63],"born":"1983/10/03"} 
+{"index":{"_id":10}} 
+{"first":"mikael","last":"backlund","goals":[3,15,13],"assists":[6,24,18],"gp":[26,82,82],"born":"1989/03/17"}
+{"index":{"_id":11}} 
+{"first":"joe","last":"colborne","goals":[3,18,13],"assists":[6,20,24],"gp":[26,67,82],"born":"1990/01/30"} 
+
+//根据查询删除(_delete_by_query)
+POST db_student/student/_delete_by_query
+{
+  "query": {
+    "match":{
+      "name":"风清扬"
+    }
+  }
+}
+
+//script方式修改单条documet,格式 POST index/type/id/_update
+POST db_student/student/42fe0543-a650-49f3-bfac-25d90d924bb5/_update
+{
+  "script": "ctx._source.description=\"安徽省合肥市高新区高新区管委会\""
+}
+
+//更新部分文档,格式 POST index/type/id/_update
+POST db_student/student/42fe0543-a650-49f3-bfac-25d90d924bb5/_update
+{
+  "doc":{
+    "name":"束义志"
+  }
+}
+
+//返回特定的字段 返回"account_number"和"balance"的字段
+POST bank/account/_search
+{
+  "query": {
+    "match_all": {}
+  },
+   "_source": ["account_number", "balance"]
+}
+
+
+
+// 我们通过function_score::script_score更新每个document的score。其中用到了for循环，和强类型定义int。 
+// 可以看到运行之后，_score的值，编程了goals值的sum，下面的两个命令均在Kibana下面运行通过，第二个命令在Postman下面运行不通过
+GET hockey/player/_search
+{
+  "query": {
+    "function_score": {
+     "script_score": {
+       "script": {
+         "lang": "painless",
+         "source": "int total=0;for(int i=0;i<doc['goals'].length;++i){total+=doc['goals'][i];}return total;"
+       }
+     }
+    }
+  }
+}
+或
+POST hockey/player/_search
+{
+  "query": {
+    "function_score": {
+      "script_score": {
+        "script": {
+          "lang": "painless",
+          "source":"""
+          int total=0;
+          for(int i=0;i<doc['goals'].length;i++){
+            total+=doc['goals'][i];
+          }
+          return total;
+          """
+        }
+      }
+    }
+  }
+}
+

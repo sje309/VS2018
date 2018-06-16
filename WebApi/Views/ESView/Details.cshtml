@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+}
+@*@model  WebApi.Models.Model*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.css" />
+</head>
+<body>
+    @*<h1>@ViewBag.Message</h1>*@
+    <div class="modal-body" style="width:80%;margin-left:40px;">
+        <form class="form-horizontal" role="form">
+            <fieldset>
+                @*<legend>配置数据源</legend>*@
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="username">用户姓名:</label>
+                    <div class="col-sm-4">
+                        @*@{
+                                if (null != ViewBag.username)
+                                {
+                                    <input class="form-control" id="username" type="text" value=@ViewBag.username />
+                                }
+                                else
+                                {
+                                    <input class="form-control" id="username" type="text" />
+                                }
+                            }*@
+                        <input class="form-control" id="username" type="text" value="@Model._source.username" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="identity_id">证件号:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="identity_id" type="text" value="@ViewBag.identity_id" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="phone_num">手机号码:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="phone_num" type="text" value="@ViewBag.phone_num" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="timestamp">记录时间:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="timestamp" type="text" value="@ViewBag.timestamp" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                @*<legend>配置数据源</legend>*@
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="src_ip">源IP:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="src_ip" type="text" value="@ViewBag.src_ip" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="des_ip">目的IP:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="des_ip" type="text" value="@ViewBag.des_ip" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="src_port">源端口:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="src_port" type="text" value="@ViewBag.src_port" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="des_port">目的端口:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="des_port" type="text" value="@ViewBag.des_port" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                @*<legend>配置数据源</legend>*@
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="protocol_type">协议类型:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="protocol_type" type="text" value="@ViewBag.protocol_type" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="header">头信息:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="header" type="text" value="@ViewBag.header" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="url">网址:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="url" type="text" value="@ViewBag.url" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="flow_type">流量信息:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="flow_type" type="text" value="@ViewBag.flow_type" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                @*<legend>配置数据源</legend>*@
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="size">信息大小:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="size" type="text" value="@ViewBag.size" />
+                    </div>
+                    <label class="col-sm-2 control-label" for="title">标题:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="title" type="text" value="@ViewBag.title" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="content">内容:</label>
+                    <div class="col-sm-10">
+                        <textarea id="content" rows="10" style="background-color:white;" class="form-control">@Html.ViewBag.content</textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+        <button type="button" class="btn btn-primary submit">确定</button>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $("#close").click(function () {
+        var close = parent.document.getElementById("close");
+        if (close && close != undefined && close != null) {
+            close.click();
+        }
+    })
+</script>
