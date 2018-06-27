@@ -153,3 +153,7 @@ POST hockey/player/_search
   }
 }
 
+
+//删除索引(删除索引名称为school)
+curl -XDELETE "http://192.168.155.221:9200/school"
+
