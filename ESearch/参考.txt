@@ -12,6 +12,8 @@ ES5.2官网
 https://www.elastic.co/guide/en/elasticsearch/reference/5.2/docs-update.html#_updates_with_a_partial_document
 Windows下面命令行工具
 https://www.cnblogs.com/haochuang/p/5593411.html
+Elasticsearch学习之深入聚合分析二 ---案例实战
+http://www.cnblogs.com/sunfie/p/7101420.html
 
 
 
