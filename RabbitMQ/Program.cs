@@ -18,10 +18,21 @@ namespace RabbitMQ
             //new Thread(Write).Start();
             //new Thread(Write).Start();
 
-            new Thread(Producer.WriteLog).Start();
-            new Thread(Producer.WriteLog).Start();
-            new Thread(Producer.WriteLog).Start();
-            new Thread(Producer.WriteLog).Start();
+            //new Thread(Producer.WriteLog).Start();
+            //new Thread(Producer.WriteLog).Start();
+            //new Thread(Producer.WriteLog).Start();
+            //new Thread(Producer.WriteLog).Start();
+
+            new Thread(SendObject.SendObjMsg).Start();
+
+            new Thread(() =>
+            {
+                SendObject.SendObjMsg();
+            }).Start();
+
+            Console.ReadLine();
+            
+
 
 
         }

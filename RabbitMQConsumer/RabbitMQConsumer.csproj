@@ -45,9 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookModel.cs" />
     <Compile Include="Consume.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiveLogs.cs" />
+    <Compile Include="RecObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

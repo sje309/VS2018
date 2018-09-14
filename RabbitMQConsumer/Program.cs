@@ -10,7 +10,10 @@ namespace RabbitMQConsumer
     {
         static void Main( string[] args )
         {
-            Consume.ReceivedLog();
+            //Consume.ReceivedLog();
+
+            RecObject.RecObjectMsg();
+            Console.ReadLine();
         }
     }
 }

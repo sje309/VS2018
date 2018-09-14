@@ -190,5 +190,23 @@ namespace ES5._6._4.Tests
             }
            
         }
+        [Test()]
+        public void TestString()
+        {
+            string a = "hello2";
+            string b = new String(new char[] { 'h', 'e', 'l', 'l', 'o','2' });
+            string c = "hello" + "2";
+            string d = new string(new char[] { 'h', 'e', 'l', 'l', 'o', '2' });
+            //String e = new String("hello2");
+            //String s = new String("abc");
+
+
+            
+
+            Console.WriteLine("a==c: " + (a == c));
+            Console.WriteLine("a==b: " + (a == b) + ",a.Equals(b): " + a.Equals(b));
+            Console.WriteLine("b==c: " + (b == c) + ",b.Equals(c): " + b.Equals(b));
+
+        }
     }
 }

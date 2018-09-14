@@ -31,7 +31,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ", "RabbitMQ\Rabbit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQConsumer", "RabbitMQConsumer\RabbitMQConsumer.csproj", "{FC4EB5E7-3FFA-41FD-91F4-4B9B04AE07D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{777B06B6-1B13-45AC-97BD-C6B35AE9521B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{40121A72-8DED-44E7-8357-E25D69E5278A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MulThread", "MulThread", "{C09F9180-2539-43B0-B353-A85FA0275B7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadDemo", "ThreadDemo\ThreadDemo.csproj", "{A18BE607-27A7-4690-8E41-76884951E77C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPLApp", "TPLApp\TPLApp.csproj", "{CFA336F8-1AC9-4972-8AB0-972B5ABAF398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{D6626585-4DE8-4287-8A03-F7EACC432D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetApp", "Log4NetApp\Log4NetApp.csproj", "{D10343E7-320C-4809-AD6A-234F49979E0A}"
+EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -81,6 +98,22 @@ Global
 		{FC4EB5E7-3FFA-41FD-91F4-4B9B04AE07D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC4EB5E7-3FFA-41FD-91F4-4B9B04AE07D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC4EB5E7-3FFA-41FD-91F4-4B9B04AE07D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40121A72-8DED-44E7-8357-E25D69E5278A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40121A72-8DED-44E7-8357-E25D69E5278A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40121A72-8DED-44E7-8357-E25D69E5278A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40121A72-8DED-44E7-8357-E25D69E5278A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18BE607-27A7-4690-8E41-76884951E77C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18BE607-27A7-4690-8E41-76884951E77C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18BE607-27A7-4690-8E41-76884951E77C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18BE607-27A7-4690-8E41-76884951E77C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA336F8-1AC9-4972-8AB0-972B5ABAF398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA336F8-1AC9-4972-8AB0-972B5ABAF398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA336F8-1AC9-4972-8AB0-972B5ABAF398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA336F8-1AC9-4972-8AB0-972B5ABAF398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D10343E7-320C-4809-AD6A-234F49979E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D10343E7-320C-4809-AD6A-234F49979E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D10343E7-320C-4809-AD6A-234F49979E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D10343E7-320C-4809-AD6A-234F49979E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,8 +128,18 @@ Global
 		{F29F9955-A43B-4251-B495-742125389ABF} = {C7C900B4-A88D-4557-B74A-02531D20A806}
 		{5AD5C8D9-0055-42A2-9071-E4888AFCB6CD} = {56097DE4-8E4A-44BC-B398-2975FB69137C}
 		{FC4EB5E7-3FFA-41FD-91F4-4B9B04AE07D3} = {56097DE4-8E4A-44BC-B398-2975FB69137C}
+		{40121A72-8DED-44E7-8357-E25D69E5278A} = {777B06B6-1B13-45AC-97BD-C6B35AE9521B}
+		{A18BE607-27A7-4690-8E41-76884951E77C} = {C09F9180-2539-43B0-B353-A85FA0275B7E}
+		{CFA336F8-1AC9-4972-8AB0-972B5ABAF398} = {C09F9180-2539-43B0-B353-A85FA0275B7E}
+		{D10343E7-320C-4809-AD6A-234F49979E0A} = {D6626585-4DE8-4287-8A03-F7EACC432D98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35FA63A3-7E9A-4F00-9766-93E1D57693EA}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

@@ -26,7 +26,8 @@ namespace Redis
             {
                 string ping = redis.Ping();
                 string echo = redis.Echo("hello world");
-                DateTime time = GetTime(redis.Time().ToString());
+                //DateTime time = GetTime(redis.Time().ToString());
+                string time = string.Format("yyyy-MM-dd HH:mm:ss", redis.Time().ToString());
                 Console.WriteLine(ping);
                 Console.WriteLine(echo);
                 Console.WriteLine(time);
@@ -48,11 +49,40 @@ namespace Redis
             }
         }
 
-        public static void HashTest()
+        public static void AddHashTest()
         {
             using (var redis = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
-               
+                string key = "hashkey";
+                string filed = "test";
+                string value = "testvalue";
+
+                bool res= redis.HSet(key, filed, value);
+                if (res)
+                {
+                    Console.WriteLine("插入hashtable成功,插入的值为: " + redis.HGet(key, filed));
+                }
+                else
+                {
+                    Console.WriteLine("插入hashtable失败");
+                }
+
+            }
+        }
+
+        public static void GetHashTest(string key,string filed)
+        {
+            using(var redis=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            {
+                string res = redis.HGet(key, filed);
+                if (!string.IsNullOrEmpty(res) && !res.Equals("nil"))
+                {
+                    Console.WriteLine("获取RedisHash 成功: " + res);
+                }
+                else
+                {
+                    Console.WriteLine("获取RedisHash 失败: " + res);
+                }
             }
         }
 
