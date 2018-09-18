@@ -1,0 +1,10 @@
+﻿1、C#多线程和线程池
+https://www.cnblogs.com/mq0036/p/6984508.html
+2、C#委托的介绍(delegate、Action、Func、predicate)
+https://www.cnblogs.com/mq0036/p/9166893.html
+3、C#多线程基础篇
+https://www.cnblogs.com/yonghuacui/p/6185610.html
+4、使用线程框架
+https://blog.csdn.net/wangzhiyu1980/article/details/45094631
+5、C#并行编程
+https://blog.csdn.net/wangzhiyu1980/article/category/1325080/1

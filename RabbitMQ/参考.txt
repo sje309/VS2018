@@ -1,0 +1,4 @@
+﻿RabbitMQ系列教程
+https://www.cnblogs.com/PatrickLiu/p/7058442.html
+RabbitMQ应用场景
+https://www.cnblogs.com/saltlight-wangchao/p/6248143.html

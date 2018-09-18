@@ -1,0 +1,2 @@
+﻿1、Log4net 使用
+https://www.cnblogs.com/yonghuacui/tag/Log4net/

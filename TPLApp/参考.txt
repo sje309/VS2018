@@ -1,0 +1,4 @@
+﻿1、数据流(任务并行库)
+https://docs.microsoft.com/zh-cn/dotnet/standard/parallel-programming/dataflow-task-parallel-library
+2、C#基础系列——异步编程初探：async和await
+https://www.cnblogs.com/landeanfen/p/4734252.html
