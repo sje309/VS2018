@@ -9,6 +9,12 @@ namespace ThreadDemo
 {
     class Program
     {
+        private static log4net.ILog log = log4net.LogManager.GetLogger(typeof(Program));
+        static int cnt = 10;
+        /// <summary>
+        /// 线程信号量，控制线程池中线程与Main线程通讯
+        /// </summary>
+        private static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
         static void Main( string[] args )
         {
             #region //创建线程
@@ -31,14 +37,78 @@ namespace ThreadDemo
 
             #region //随机生成ip地址
 
-            String ip = getRandomIp();
-            Console.WriteLine("ip: " + ip);
+            //String ip = getRandomIp();
+            //Console.WriteLine("ip: " + ip);
 
             #endregion
 
+            #region //Test Semaphore
+            //for(int i = 0; i < 9; i++)
+            //{
+            //    Thread td = new Thread(new ParameterizedThreadStart(SemaphoreClass.testFun));
+            //    td.Name = string.Format("编号{0}", i.ToString());
+            //    td.Start(td.Name);
+            //}
+            #endregion
 
+            #region //Test AutoResetEvent
+            //Thread td = new Thread(new ThreadStart(AutoResetEventClass.Sqrt));
+            //td.Name = "线程一";
+            //td.Start();
+            //AutoResetEventClass.autoResetEvent.Set();
+            #endregion
+
+            #region //简单线程池
+            //ThreadPool.SetMinThreads(1, 1);
+            //ThreadPool.SetMaxThreads(5, 5);
+            //for(int i = 1; i <= 10; i++)
+            //{
+            //    //ThreadPool.QueueUserWorkItem(new WaitCallback(testFun), i);
+            //    ThreadPool.QueueUserWorkItem(new WaitCallback(testFunByResetEvent), i);
+            //}
+            //Console.WriteLine("主线程执行!");
+            //Console.WriteLine("主线程结束!");
+            //autoResetEvent.WaitOne();
+            //Console.WriteLine("线程池终止!");
+            #endregion
+
+            #region //IOC 控制反转\依赖注入
+            /**1、构造函数注入*/
+            //DIP.Water water = new DIP.RiverWater();
+            //DIP.Fish fish = new DIP.Fish(water);
+            //fish.Live();
+
+            /**2、setter方式注入*/
+            //DIP.Water water = new DIP.LakeWater();
+            //DIP.Fish fish = new DIP.Fish();
+            //fish.setWater(water);
+            //fish.Live();
+
+            /**3、接口注入*/
+            DIP.Water water = new DIP.WellWater();
+            DIP.Fish fish = new DIP.Fish();
+            fish.setWater(water);
+            fish.Live();
+
+            #endregion
 
             Console.ReadKey();
+        }
+        public static void testFun(object obj )
+        {
+            Console.WriteLine(string.Format("{0}:第{1}个线程池", DateTime.Now.ToString(), obj.ToString()));
+            //log.Info(string.Format("{0}:第{1}个线程池", DateTime.Now.ToString(), obj.ToString()));
+            Thread.Sleep(5 * 1000);
+        }
+        public static void testFunByResetEvent(object obj )
+        {
+            cnt -= 1;
+            Console.WriteLine(string.Format("{0}:第{1}个线程池", DateTime.Now.ToString(), obj.ToString()));
+            Thread.Sleep(5 * 1000);
+            if (cnt == 0)
+            {
+                autoResetEvent.Set();
+            }
         }
         private static void A(object state )
         {

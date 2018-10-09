@@ -8,3 +8,5 @@ https://www.cnblogs.com/yonghuacui/p/6185610.html
 https://blog.csdn.net/wangzhiyu1980/article/details/45094631
 5、C#并行编程
 https://blog.csdn.net/wangzhiyu1980/article/category/1325080/1
+6、依赖倒置、控制返回和依赖注入的理解
+https://www.cnblogs.com/sayook/p/9681217.html
