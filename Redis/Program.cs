@@ -11,7 +11,7 @@ namespace Redis
         static void Main(string[] args)
         {
             #region //string测试
-            //CSRedis.SetKey();
+            CSRedis.SetKey();
             #endregion
 
             #region //hash测试
@@ -26,7 +26,8 @@ namespace Redis
             //HashClass.TestObject();
 
             //HashClass.TestDelObject();
-            HashClass.TestHSetObject();
+
+            //HashClass.TestHSetObject();
 
 
             #endregion
