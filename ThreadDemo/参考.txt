@@ -10,3 +10,5 @@ https://blog.csdn.net/wangzhiyu1980/article/details/45094631
 https://blog.csdn.net/wangzhiyu1980/article/category/1325080/1
 6、依赖倒置、控制返回和依赖注入的理解
 https://www.cnblogs.com/sayook/p/9681217.html
+7、设计模式参考
+https://www.cnblogs.com/Bobby0322/p/4179921.html
