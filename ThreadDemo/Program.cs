@@ -85,10 +85,26 @@ namespace ThreadDemo
             //fish.Live();
 
             /**3、接口注入*/
-            DIP.Water water = new DIP.WellWater();
-            DIP.Fish fish = new DIP.Fish();
-            fish.setWater(water);
-            fish.Live();
+            //DIP.Water water = new DIP.WellWater();
+            //DIP.Fish fish = new DIP.Fish();
+            //fish.setWater(water);
+            //fish.Live();
+
+            #endregion
+
+            #region //工厂模式测试
+
+            /**从配置文件中获取工厂参数名称*/
+            string factoryName = System.Configuration.ConfigurationManager.AppSettings["factoryName"];
+            if (!string.IsNullOrWhiteSpace(factoryName))
+            {
+                //FactoryMethod.IFactory factory = (FactoryMethod.IFactory)System.Reflection.Assembly.Load("ThreadDemo.FactoryMethod").CreateInstance("FactoryMethod." + factoryName);
+                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(FactoryMethod.IFactory));
+                FactoryMethod.IFactory factory = (FactoryMethod.IFactory)assembly.CreateInstance(factoryName);
+
+                FactoryMethod.ICoat coat = factory.CreateCoat();
+                coat.ShowCoat();
+            }
 
             #endregion
 
