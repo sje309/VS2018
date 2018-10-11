@@ -2,15 +2,13 @@
 using Nest;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Test3
 {
-    class Program
+    internal class Program
     {
-        static void Main( string[] args )
+        private static void Main( string[] args )
         {
             //testES();
 
@@ -26,15 +24,11 @@ namespace Test3
 
             //var str = "{\"key\":\"合肥\",\"timestampstart\":\"2018-02-23 16:14:12\",\"timestampend\":\"2018-05-23 16:14:12\",\"phone_num\":[],\"protocol_type\":[\"HTTP\",\"HTTPS\",\"FTP\",\"SMTP\",\"POP3\",\"P2P\"],\"flow_type\":\"\",\"resource_type\":[\"HTML\",\"CSS\",\"图片\",\"语音\",\"视频\",\"FLASH\"],\"size\":10,\"from\":0}";
 
-
             //var str = "{\"key\":\"合肥\",\"timestampstart\":\"2018-02-23 16:14:12\",\"timestampend\":\"2018-05-23 16:14:12\",\"phone_num\":[],\"protocol_type\":[\"HTTP\",\"HTTPS\",\"FTP\",\"SMTP\",\"POP3\",\"P2P\"],\"flow_type\":\"上行\",\"resource_type\":[\"HTML\",\"CSS\",\"图片\",\"语音\",\"视频\",\"FLASH\"],\"size\":10,\"from\":0}";
-
 
             //var str = "{\"key\":\"合肥\",\"timestampstart\":\"2018-02-23 16:14:12\",\"timestampend\":\"2018-05-23 16:14:12\",\"phone_num\":[],\"protocol_type\":[],\"flow_type\":\"上行\",\"resource_type\":[\"HTML\",\"CSS\",\"图片\",\"语音\",\"视频\",\"FLASH\"],\"size\":10,\"from\":0}";
 
-
             //var str = "{\"key\":\"合肥\",\"timestampstart\":\"2018-02-23 16:14:12\",\"timestampend\":\"2018-05-23 16:14:12\",\"phone_num\":[],\"protocol_type\":[],\"flow_type\":\"上行\",\"resource_type\":[\"HTML\"],\"size\":10,\"from\":0}";
-
 
             //var str = "{\"key\":\"\",\"timestampstart\":\"2018-02-23 16:14:12\",\"timestampend\":\"2018-05-23 16:14:12\",\"phone_num\":[],\"protocol_type\":[],\"flow_type\":\"上行\",\"resource_type\":[\"HTML\"],\"size\":10,\"from\":0}";
 
@@ -55,7 +49,6 @@ namespace Test3
                  new Uri("http://192.168.131.15:9200"),
                  new Uri("http://192.168.131.16:9200")
             };
-
 
             //var connectionPool = new SniffingConnectionPool(new Uri[] { new Uri("http://192.168.131.12:9200") });
             var connectionPool = new StaticConnectionPool(nodes);
@@ -84,7 +77,6 @@ namespace Test3
                 .Field(f => f.timestamp).GreaterThanOrEquals(new DateTime(2018, 3, 17, 0, 0, 0)).LessThanOrEquals(new DateTime(2018, 5, 18, 16, 45, 15))))
             .Sort(l => l.Descending(asc => asc.phone_num)));
 
-
             var search2 = client.Search<ESModel>(s => s
      .From(0)
      .Size(100)
@@ -98,8 +90,6 @@ namespace Test3
                q => q.
                DateRange(r => r
                .Field(f => f.timestamp).GreaterThanOrEquals(new DateTime(2018, 3, 17, 0, 0, 0)).LessThanOrEquals(new DateTime(2018, 5, 18, 16, 45, 15)))));
-
-
 
             var search3 = client.Search<ESModel>(s => s
               .From(0)
@@ -116,7 +106,6 @@ namespace Test3
                       l => l.Field(
                           g => g.phone_num)
                           .Query("15000825521"))))));
-
 
             Root root = new Root();
             root.from = 0;
@@ -135,8 +124,6 @@ namespace Test3
             Bool _bool = new Bool();
 
             Should should = new Should();
-
-
 
             Term termprotocal1 = new Term();
             termprotocal1.protocol_type = "POP3";
@@ -194,9 +181,7 @@ namespace Test3
                 itemtitle
             };
 
-
             query._bool = _bool;
-
 
             root.query = query;
             var jSetting = new Newtonsoft.Json.JsonSerializerSettings { NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore };
@@ -209,12 +194,7 @@ namespace Test3
             //StringBuilder sb = new StringBuilder();
             //sb.Append("")
 
-
             var search4 = HttpHelper.PostHttpResponse("http://192.168.131.12:9200/tekuan/_search", param);
-
-
-
-
 
             //foreach (var item in search1.Hits)
             //{
@@ -235,7 +215,6 @@ namespace Test3
 
             //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(search1.Hits.ToList()));
         }
-
 
         public static string testParams( long size, long from, string title, string[] protocol_type, string flow_type, string[] resource_type, string timestart, string timend, string[] phone_num )
         {
@@ -353,7 +332,6 @@ namespace Test3
                   + "}"
                   + "},");
 
-
             sb.Append(""
                 + "{"
                 + "\"bool\": {"
@@ -385,7 +363,6 @@ namespace Test3
                   + "}");
             }
 
-
             sb.Append("]"
              + "}"
             + "},");
@@ -397,7 +374,6 @@ namespace Test3
               + "}"
               + "}"
               + "}");
-
 
             //            sb.Append("{"
             //                     + "\"size\": " + size + ","
@@ -429,7 +405,6 @@ namespace Test3
             //                    }
             //                }
             //            }
-
 
             //            sb.Append("{"
             //                     + " \"bool\": {"
@@ -503,8 +478,6 @@ namespace Test3
             //    + "}"
             //  + "}"
             //+ "}");
-
-
 
             string result = HttpHelper.PostHttpResponse("http://192.168.131.12:9200/tekuan/_search", sb.ToString());
             return result;

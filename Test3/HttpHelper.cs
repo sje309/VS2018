@@ -4,19 +4,13 @@
 *文件名称：HttpHelper
 *创建人：  shuyizhi
 *创建时间：2018/5/23 9:16:29
-*文件描述: 
+*文件描述:
 ************************************************************************/
 
-
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 
 namespace Test3
 {
@@ -62,6 +56,7 @@ namespace Test3
             }
             return jsonData;
         }
+
         /// <summary>
         /// 获取HTTP POST方式响应内容
         /// </summary>
@@ -100,7 +95,6 @@ namespace Test3
             return jsonData;
         }
 
-
         /// <summary>
         /// 获取url主机部分
         /// 如 http://www.xxx.com/test/admin.aspx 返回 http://www.xxx.com/
@@ -123,6 +117,7 @@ namespace Test3
         //}
 
         #region Cookie处理
+
         /// <summary>
         /// 写cookie值
         /// </summary>
@@ -175,8 +170,6 @@ namespace Test3
         //    HttpContext.Current.Response.AppendCookie(cookie);
 
         //}
-
-
 
         /// <summary>
         /// 写cookie值
@@ -270,6 +263,7 @@ namespace Test3
         //    HttpCookie cookie = new HttpCookie(strName);
         //    WriteCookie(strName, "", -60);
         //}
-        #endregion
+
+        #endregion Cookie处理
     }
 }

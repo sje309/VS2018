@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using ThreadDemo.Builder;
 
 namespace ThreadDemo
 {
@@ -15,15 +16,19 @@ namespace ThreadDemo
         /// 线程信号量，控制线程池中线程与Main线程通讯
         /// </summary>
         private static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-        static void Main( string[] args )
+
+        static void Main(string[] args)
         {
             #region //创建线程
+
             //System.Threading.Thread thread = new System.Threading.Thread(TestThread.ThreadMethod);
             //thread.Name = "子线程";
             //thread.Start("shuyizhi");
+
             #endregion
 
             #region //终止线程
+
             //Thread thread = new Thread(TestThread.ThreadMethodAbort);
             //thread.Name = "小A";
             //thread.Start();
@@ -31,8 +36,10 @@ namespace ThreadDemo
             #endregion
 
             #region //CPU过高测试
+
             //new Thread(A).Start();
             //new Thread(B).Start();
+
             #endregion
 
             #region //随机生成ip地址
@@ -43,22 +50,27 @@ namespace ThreadDemo
             #endregion
 
             #region //Test Semaphore
+
             //for(int i = 0; i < 9; i++)
             //{
             //    Thread td = new Thread(new ParameterizedThreadStart(SemaphoreClass.testFun));
             //    td.Name = string.Format("编号{0}", i.ToString());
             //    td.Start(td.Name);
             //}
+
             #endregion
 
             #region //Test AutoResetEvent
+
             //Thread td = new Thread(new ThreadStart(AutoResetEventClass.Sqrt));
             //td.Name = "线程一";
             //td.Start();
             //AutoResetEventClass.autoResetEvent.Set();
+
             #endregion
 
             #region //简单线程池
+
             //ThreadPool.SetMinThreads(1, 1);
             //ThreadPool.SetMaxThreads(5, 5);
             //for(int i = 1; i <= 10; i++)
@@ -70,9 +82,11 @@ namespace ThreadDemo
             //Console.WriteLine("主线程结束!");
             //autoResetEvent.WaitOne();
             //Console.WriteLine("线程池终止!");
+
             #endregion
 
             #region //IOC 控制反转\依赖注入
+
             /**1、构造函数注入*/
             //DIP.Water water = new DIP.RiverWater();
             //DIP.Fish fish = new DIP.Fish(water);
@@ -94,22 +108,43 @@ namespace ThreadDemo
 
             #region //工厂模式测试
 
-            /**从配置文件中获取工厂参数名称*/
-            string factoryName = System.Configuration.ConfigurationManager.AppSettings["factoryName"];
-            if (!string.IsNullOrWhiteSpace(factoryName))
-            {
-                //FactoryMethod.IFactory factory = (FactoryMethod.IFactory)System.Reflection.Assembly.Load("ThreadDemo.FactoryMethod").CreateInstance("FactoryMethod." + factoryName);
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(FactoryMethod.IFactory));
-                FactoryMethod.IFactory factory = (FactoryMethod.IFactory)assembly.CreateInstance(factoryName);
+            ///**从配置文件中获取工厂参数名称*/
+            //string factoryName = System.Configuration.ConfigurationManager.AppSettings["factoryName"];
+            //if (!string.IsNullOrWhiteSpace(factoryName))
+            //{
+            //    System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(FactoryMethod.IFactory));
+            //    FactoryMethod.IFactory factory = (FactoryMethod.IFactory)assembly.CreateInstance("ThreadDemo.FactoryMethod." + factoryName);
+            //    if (null != factory)
+            //    {
+            //        FactoryMethod.ICoat coat = factory.CreateCoat();
+            //        coat.ShowCoat();
+            //    }              
+            //}
 
-                FactoryMethod.ICoat coat = factory.CreateCoat();
-                coat.ShowCoat();
-            }
+            #endregion
+
+            #region //建造者模式(Build Pattern)
+
+            VehicleBuilder builder1 = new ScooterBuilder();
+            VehicleBuilder builder2 = new CarBuilder();
+            VehicleBuilder builder3 = new CarBuilder();
+
+            Builder.Shop shop=new Shop();
+
+            shop.Construct(builder1);
+            builder1.Vehicle.show();
+
+            shop.Construct(builder2);
+            builder2.Vehicle.show();
+
+            shop.Construct(builder3);
+            builder3.Vehicle.show();
 
             #endregion
 
             Console.ReadKey();
         }
+
         public static void testFun(object obj )
         {
             Console.WriteLine(string.Format("{0}:第{1}个线程池", DateTime.Now.ToString(), obj.ToString()));

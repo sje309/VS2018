@@ -4,19 +4,13 @@
 *文件名称：ESModel
 *创建人：  shuyizhi
 *创建时间：2018/5/22 14:41:57
-*文件描述: 
+*文件描述:
 ************************************************************************/
 
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test3
 {
-
     [Serializable]
     public class ESModel
     {
@@ -36,7 +30,7 @@ namespace Test3
         public long size { get; set; }
         public string src_ip { get; set; }
         public int src_port { get; set; }
-        
+
         public DateTime timestamp { get; set; }
         public string title { get; set; }
         public string type { get; set; }

@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="AutoResetEventClass.cs" />
     <Compile Include="BaseThread.cs" />
+    <Compile Include="Builder\CarBuilder.cs" />
+    <Compile Include="Builder\MotorCycleBuilder.cs" />
+    <Compile Include="Builder\ScooterBuilder.cs" />
+    <Compile Include="Builder\Shop.cs" />
+    <Compile Include="Builder\Vehicle.cs" />
+    <Compile Include="Builder\VehicleBuilder.cs" />
     <Compile Include="DIP\RiverWater.cs" />
     <Compile Include="FactoryMethod\BusinessCoat.cs" />
     <Compile Include="FactoryMethod\BusinessFactory.cs" />

@@ -7,13 +7,9 @@
 *文件描述: 使用CSRedis框架测试 Redis Hash测试
 ************************************************************************/
 
-
+using CSRedis;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CSRedis;
 
 namespace Redis
 {
@@ -24,9 +20,9 @@ namespace Redis
         /// </summary>
         public static void TestHGETAndHSET()
         {
-            using (RedisClient client=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (RedisClient client = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
-                bool res= client.HSet("site", "redis", "redis.com");
+                bool res = client.HSet("site", "redis", "redis.com");
                 if (res)
                 {
                     Console.WriteLine("hset成功,\thget(\"site\",\"redis\"): " + client.HGet("site", "redis"));
@@ -37,14 +33,15 @@ namespace Redis
                 }
             }
         }
+
         /// <summary>
         /// HMSet和HMGet测试
         /// </summary>
         public static void TestHMGetAndHMSet()
         {
-            using(RedisClient client=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (RedisClient client = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
-               string res= client.HMSet("runoobkey", "name", "redis tutorial", "description", "redsi baisc commands for caching", "likes", "20", "visitors", "23000");
+                string res = client.HMSet("runoobkey", "name", "redis tutorial", "description", "redsi baisc commands for caching", "likes", "20", "visitors", "23000");
                 if (!string.IsNullOrEmpty(res) && res.ToLower() == "ok")
                 {
                     Console.WriteLine("hmset成功,hmget结果如下：");
@@ -68,10 +65,9 @@ namespace Redis
                     //        Console.WriteLine(result);
                     //    }
                     //}
-                    
 
                     //HVals()获取
-                    string[] results= client.HVals("runoobkey");
+                    string[] results = client.HVals("runoobkey");
                     if (null != results && results.Length > 0)
                     {
                         foreach (string result in results)
@@ -84,12 +80,13 @@ namespace Redis
                 }
             }
         }
+
         /// <summary>
         /// 判断给定的key、field是否存在，存在则删除
         /// </summary>
         public static void TestHExistsAndHDel()
         {
-            using(RedisClient client=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (RedisClient client = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
                 bool exists = client.HExists("runoobkey", "name");
                 if (exists)
@@ -108,7 +105,7 @@ namespace Redis
                 else
                 {
                     Console.WriteLine("key:runoobkey,filed:name 不存在");
-                } 
+                }
             }
         }
 
@@ -122,11 +119,11 @@ namespace Redis
                 //用hash存储
                 start = DateTime.Now;
                 bool res = false;
-                foreach(User u in users)
+                foreach (User u in users)
                 {
-                   res = client.HSet("myObject", u.Id, u);
+                    res = client.HSet("myObject", u.Id, u);
                 }
-                
+
                 if (res)
                 {
                     Console.WriteLine("redis中存入10W条数据成功,耗时: " + (DateTime.Now.Subtract(start).Seconds + " s"));
@@ -140,14 +137,14 @@ namespace Redis
 
         public static void TestDelObject()
         {
-            using(RedisClient client=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (RedisClient client = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
                 List<User> users = User.GetUsers();
                 int count = 0;
                 DateTime start = DateTime.Now;
-                foreach(var user in users)
+                foreach (var user in users)
                 {
-                   long res= client.HDel("myObject", user.Id);
+                    long res = client.HDel("myObject", user.Id);
                     if (res != 0)
                     {
                         count++;
@@ -156,9 +153,10 @@ namespace Redis
                 Console.WriteLine("删除消耗的时间: " + (DateTime.Now.Subtract(start).TotalSeconds + " s,总共删除: " + count + " 条数据"));
             }
         }
+
         public static void TestHSetObject()
         {
-            using(RedisClient client=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (RedisClient client = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
                 User user = new User();
                 user.Address = "安徽省合肥市高新区望江西路与创新大道交叉口中国科学技术大学先进技术院";
@@ -177,12 +175,10 @@ namespace Redis
                     Console.WriteLine("插入失败!");
                 }
 
-
                 string resGet = client.HGet("object", "shuyizhi");
                 Console.WriteLine("resGet: " + resGet);
                 Console.WriteLine("反序列化后: " + Newtonsoft.Json.JsonConvert.DeserializeObject<User>(resGet).ToString());
             }
         }
-
     }
 }

@@ -8,13 +8,8 @@
 *参考：https://blog.csdn.net/sparkexpert/article/details/51166626
 ************************************************************************/
 
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CSRedis;
+using System;
 
 namespace Redis
 {
@@ -38,7 +33,6 @@ namespace Redis
                 Console.WriteLine(redis.Get("C#Key"));
                 Console.WriteLine(redis.Get("C#Key2"));
 
-
                 //for(int i = 0; i < 50000; i++)
                 //{
                 //    redis.IncrAsync("test1");
@@ -57,7 +51,7 @@ namespace Redis
                 string filed = "test";
                 string value = "testvalue";
 
-                bool res= redis.HSet(key, filed, value);
+                bool res = redis.HSet(key, filed, value);
                 if (res)
                 {
                     Console.WriteLine("插入hashtable成功,插入的值为: " + redis.HGet(key, filed));
@@ -66,13 +60,12 @@ namespace Redis
                 {
                     Console.WriteLine("插入hashtable失败");
                 }
-
             }
         }
 
-        public static void GetHashTest(string key,string filed)
+        public static void GetHashTest( string key, string filed )
         {
-            using(var redis=new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
+            using (var redis = new RedisClient(RedisConfig.RedisConnection, RedisConfig.RedisPort))
             {
                 string res = redis.HGet(key, filed);
                 if (!string.IsNullOrEmpty(res) && !res.Equals("nil"))
@@ -91,7 +84,7 @@ namespace Redis
         /// </summary>
         /// <param name=”timeStamp”></param>
         /// <returns></returns>
-        private static DateTime GetTime(string timeStamp)
+        private static DateTime GetTime( string timeStamp )
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             long lTime = long.Parse(timeStamp + "0000000");
@@ -103,7 +96,7 @@ namespace Redis
         /// </summary>
         /// <param name=”time”></param>
         /// <returns></returns>
-        private static int ConvertDateTimeInt(System.DateTime time)
+        private static int ConvertDateTimeInt( System.DateTime time )
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
             return (int)(time - startTime).TotalSeconds;

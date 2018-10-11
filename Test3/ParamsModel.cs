@@ -4,15 +4,10 @@
 *文件名称：ParamsModel
 *创建人：  shuyizhi
 *创建时间：2018/5/23 16:16:48
-*文件描述: 
+*文件描述:
 ************************************************************************/
 
-
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test3
 {
@@ -26,7 +21,6 @@ namespace Test3
         public string[] phone_num { get; set; }
 
         public string[] protocol_type { get; set; }
-
 
         public string[] resource_type { get; set; }
 

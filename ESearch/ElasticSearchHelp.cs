@@ -211,7 +211,7 @@ namespace ESearch
         /// <returns></returns>
         public static bool DeleteAllTypesByIndex<T>( ElasticClient client, string indexName, string typeName ) where T : class
         {
-            var deleQueryRequest = new DeleteByQueryRequest<T>(indexName, typeName);     
+            var deleQueryRequest = new DeleteByQueryRequest<T>(indexName, typeName);
             var mustClauses = new List<QueryContainer>();
             mustClauses.Add(new MatchAllQuery());
 
@@ -224,7 +224,6 @@ namespace ESearch
                     .Query(q => q
                     .MatchAll()));
             return delResponse.IsValid;
-
         }
 
         /// <summary>

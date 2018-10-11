@@ -4,17 +4,10 @@
 *文件名称：RedisConfig
 *创建人：  shuyizhi
 *创建时间：2018/4/13 13:40:37
-*文件描述: 
+*文件描述:
 ************************************************************************/
 
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using ServiceStack.Redis;
 
 namespace Redis
 {
@@ -24,6 +17,7 @@ namespace Redis
         {
             get { return Config.GetConfigValue("redisServer"); }
         }
+
         public static int RedisPort
         {
             get { return Config.GetConfigInt("redisPort"); }
@@ -33,14 +27,15 @@ namespace Redis
         {
             get { return Config.GetConfigInt("maxActive"); }
         }
+
         public static int MaxIdle
         {
             get { return Config.GetConfigInt("maxIdle"); }
         }
+
         public static int MaxWait
         {
             get { return Config.GetConfigInt("maxWait"); }
         }
-      
     }
 }
