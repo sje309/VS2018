@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,27 @@ namespace ThreadDemo
         /// 线程信号量，控制线程池中线程与Main线程通讯
         /// </summary>
         private static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+
+        #region 定义队列
+        /// <summary>
+        /// 定义队列，存在并发风险
+        /// </summary>
+        public static  Queue<Product> productQueue=new Queue<Product>();
+        /// <summary>
+        /// 定义堆栈，存在并发风险
+        /// </summary>
+        public static Stack<Product> productStack=new Stack<Product>();
+        /// <summary>
+        /// .Net 4.0后，线程安全的先进先出集合
+        /// </summary>
+        public static ConcurrentQueue<Product> productConcurrentQueue =
+            new ConcurrentQueue<Product>();
+        /// <summary>
+        /// .Net 4.0后，线程安全的先进后出节后
+        /// </summary>
+        public static ConcurrentStack<Product> productConcurrentStack=new ConcurrentStack<Product>();
+
+        #endregion
 
         static void Main(string[] args)
         {
@@ -125,24 +147,128 @@ namespace ThreadDemo
 
             #region //建造者模式(Build Pattern)
 
-            VehicleBuilder builder1 = new ScooterBuilder();
-            VehicleBuilder builder2 = new CarBuilder();
-            VehicleBuilder builder3 = new CarBuilder();
+            //VehicleBuilder builder1 = new ScooterBuilder();
+            //VehicleBuilder builder2 = new CarBuilder();
+            //VehicleBuilder builder3 = new CarBuilder();
 
-            Builder.Shop shop=new Shop();
+            //Builder.Shop shop=new Shop();
 
-            shop.Construct(builder1);
-            builder1.Vehicle.show();
+            //shop.Construct(builder1);
+            //builder1.Vehicle.show();
 
-            shop.Construct(builder2);
-            builder2.Vehicle.show();
+            //shop.Construct(builder2);
+            //builder2.Vehicle.show();
 
-            shop.Construct(builder3);
-            builder3.Vehicle.show();
+            //shop.Construct(builder3);
+            //builder3.Vehicle.show();
 
             #endregion
 
+            #region //线程安全队列、堆栈和线程非安全队列、堆栈
+            ///**普通入队列操作，存在线程安全*/
+            //Task t1 = new TaskFactory().StartNew(EnterQueue);
+            //Task t2 = new Task(() => EnterQueue());
+            //t2.Start();
+            //Task t3 = Task.Factory.StartNew(() => EnterQueue());
+            //Task t4 = Task.Run(() => EnterQueue());
+            //Task.WaitAll(t1, t2, t3, t4);
+
+            ///**普通入栈操作，存在线程安全*/
+            //Task t5 = new TaskFactory().StartNew(EnterStack);
+            //Task t6 = new Task(EnterStack);
+            //t6.Start();
+            //Task t7 = Task.Factory.StartNew(EnterStack);
+            //Task t8 = Task.Run(() => EnterStack());
+            //Task.WaitAll(t5, t6, t7, t8);
+
+            ///**线程安全入队列*/
+            //Task t55 = new Task(EnterConcurrentQueue);
+            //Task t66 = new Task(() => { EnterConcurrentQueue(); });
+            //t66.Start();
+            //Task t77 = Task.Run(() => { EnterConcurrentQueue(); });
+            //Task t88 = Task.Factory.StartNew(() => { EnterConcurrentQueue(); });
+            //Task.WaitAll(t55, t66, t77, t88);
+
+            ///**线程安全入栈*/
+            //Task t11 = Task.Factory.StartNew(EnterConcurrentStack);
+            //Task t22 = Task.Factory.StartNew(EnterConcurrentStack);
+            //Task t33 = Task.Factory.StartNew(EnterConcurrentStack);
+            //Task t44 = Task.Factory.StartNew(EnterConcurrentStack);
+            //Task.WaitAll(t11, t22, t33, t44);
+
+            //Console.WriteLine("productQueue队列中共有元素: " + productQueue.Count + "个,实际应该40000个，存在线程安全！");
+            //Console.WriteLine("productStack堆栈中共有元素: " + productStack.Count + "个，实际应该40000个，存在线程安全！");
+
+            //Console.WriteLine("productConcurrentQueue中共有元素: " + productConcurrentQueue.Count + "个，实际应该40000个，线程安全！");
+            //Console.WriteLine("productConcurrentStack中共有元素: " + productConcurrentStack.Count + "个，实际应该有40000个，线程安全！");
+            #endregion
+
             Console.ReadKey();
+        }
+        /// <summary>
+        /// 入队列
+        /// </summary>
+        public static void EnterQueue()
+        {
+            for (int i = 0; i < 10001; i++)
+            {
+                Product model = new Product
+                {
+                    Category = "Category" + i,
+                    Name = "ProductName" + i,
+                    SellPrice = i
+                };
+                productQueue.Enqueue(model);
+            }
+        }
+        /// <summary>
+        /// 入栈
+        /// </summary>
+        public static void EnterStack()
+        {
+            for (int i = 0; i < 10001; i++)
+            {
+                Product model = new Product
+                {
+                    Category = "Category" + i,
+                    Name = "ProductName" + i,
+                    SellPrice = i
+                };
+                productStack.Push(model);
+            }
+        }
+        /// <summary>
+        /// 入队列，线程安全集合
+        /// </summary>
+        public static void EnterConcurrentQueue()
+        {
+            for(int i = 0; i < 10001; i++)
+            {
+                Product model = new Product
+                {
+                    Category = "Category" + i,
+                    Name = "ProductName" + i,
+                    SellPrice = i
+                };
+                productConcurrentQueue.Enqueue(model);
+            }
+        }
+        /// <summary>
+        /// 入栈，线程安全集合
+        /// </summary>
+        public static void EnterConcurrentStack()
+        {
+            for(int i = 0; i < 10001; i++)
+            {
+                Product model = new Product
+                {
+                    Category = "Category" + i,
+                    Name = "ProductName" + i,
+                    SellPrice = i
+                };
+
+                productConcurrentStack.Push(model);
+            }
         }
 
         public static void testFun(object obj )
